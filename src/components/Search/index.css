@@ -1,0 +1,9 @@
+.Appcontainer {
+    margin: 0 auto;
+    width: 800px;
+    background-color: red;
+}
+
+.Appcontainer__item {
+    min-height: 80px
+}
