@@ -28,7 +28,7 @@ class movieDetails extends Component {
 			<Card className={'card'}>
 				<CardMedia
 					className={'cover'}
-					image="https://images.unsplash.com/photo-1530075288903-69b220251c3e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=032bc1890fe094136025465c66302731&auto=format&fit=crop&w=300&q=60"
+					image="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Venom_poster.jpg/220px-Venom_poster.jpg"
 					title={this.state.movieDetail.title}
 				/>
 				<div className={'details'}>
