@@ -20,3 +20,12 @@
 .Avatar {
     border-radius: 0px
 }
+
+.root {
+    max-Width: 400;
+    flex-Grow: 1
+}
+
+.MuiMobileStepper-dot-136.MuiMobileStepper-dotActive-137 {
+    display: none;
+}

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import List from '@material-ui/core/List';
-import { ListItem, Divider } from '@material-ui/core';
+import { ListItem, Divider, Button, MobileStepper } from '@material-ui/core';
 import serviceAPI from '../../services/api';
 import './index.css';
 import { Link } from 'react-router-dom';
 
 class movieList extends Component {
 	state = {
-		defaultPage: '1',
+		defaultPage: 1,
 		mylist: [
 			{
 				Message: 'nada'
@@ -15,6 +15,10 @@ class movieList extends Component {
 		]
 	};
 	componentDidMount() {
+		this.getMovieList();
+	}
+
+	getMovieList() {
 		serviceAPI
 			.getPopularMovie(this.state.defaultPage)
 			.then(response => {
@@ -24,6 +28,16 @@ class movieList extends Component {
 			})
 			.catch(() => {});
 	}
+
+	handleNext = () => {
+		this.setState(state => ({ defaultPage: state.defaultPage + 1 }));
+		this.getMovieList();
+	};
+
+	handleBack = () => {
+		this.setState(state => ({ defaultPage: state.defaultPage - 1 }));
+		this.getMovieList();
+	};
 
 	render() {
 		return (
@@ -49,6 +63,24 @@ class movieList extends Component {
 								</Link>
 							</div>
 						))}
+						<MobileStepper
+							position="static"
+							className={'root'}
+							nextButton={
+								<Button size="small" onClick={this.handleNext}>
+									Next
+								</Button>
+							}
+							backButton={
+								<Button
+									size="small"
+									onClick={this.handleBack}
+									disabled={this.state.defaultPage === 1}
+								>
+									Back
+								</Button>
+							}
+						/>
 					</List>
 				</div>
 			</div>
