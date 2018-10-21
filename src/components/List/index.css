@@ -1,9 +1,22 @@
 .Appcontainer {
     margin: 0 auto;
     width: 800px;
-    background-color: red;
 }
 
+
+
 .Appcontainer__item {
-    min-height: 80px
+    min-height: 80px;
+    display: block;
+    width: 100%;
+    padding: 2%
+}
+
+.Appcontainer__item span {
+    font-size: 30px !important;
+    padding: 10%;
+}
+
+.Avatar {
+    border-radius: 0px
 }
