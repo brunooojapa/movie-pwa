@@ -1,0 +1,17 @@
+	.card {
+		display: flex;
+		min-height: 400px;
+	}
+
+	.details {
+		display: flex;
+		flex-direction: column
+	}
+
+	.content {
+		flex: 1 0 auto
+	}
+
+	.cover {
+		width: 20%
+	}
