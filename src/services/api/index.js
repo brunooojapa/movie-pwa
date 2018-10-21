@@ -12,6 +12,12 @@ const serviceAPI = {
 		return axios.get(
 			`https://api.themoviedb.org/3/movie/335983?api_key=${API}&language=en-US`
 		);
+	},
+
+	getSearchMovies(name) {
+		return axios.get(
+			`https://api.themoviedb.org/3/search/movie?api_key=${API}&language=en-US&query=${name}&page=1&include_adult=false`
+		);
 	}
 };
 

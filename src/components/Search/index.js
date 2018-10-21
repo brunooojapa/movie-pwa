@@ -1,105 +1,112 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Toolbar, Typography, InputBase, AppBar } from '@material-ui/core/';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
+import React, { Component } from 'react';
+import { LinearProgress, Button, Snackbar } from '@material-ui/core';
+import serviceAPI from '../../services/api';
 
-const styles = theme => ({
-	root: {
-		width: '100%'
-	},
-	grow: {
-		flexGrow: 1
-	},
-	menuButton: {
-		marginLeft: -12,
-		marginRight: 20
-	},
-	title: {
-		display: 'none',
-		[theme.breakpoints.up('sm')]: {
-			display: 'block'
-		}
-	},
-	search: {
-		position: 'relative',
-		borderRadius: theme.shape.borderRadius,
-		backgroundColor: fade(theme.palette.common.white, 0.15),
-		'&:hover': {
-			backgroundColor: fade(theme.palette.common.white, 0.25)
-		},
-		marginLeft: 0,
-		width: '100%',
-		[theme.breakpoints.up('sm')]: {
-			marginLeft: theme.spacing.unit,
-			width: 'auto'
-		}
-	},
-	searchIcon: {
-		width: theme.spacing.unit * 9,
-		height: '100%',
-		position: 'absolute',
-		pointerEvents: 'none',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	inputRoot: {
-		color: 'inherit',
-		width: '100%'
-	},
-	inputInput: {
-		paddingTop: theme.spacing.unit,
-		paddingRight: theme.spacing.unit,
-		paddingBottom: theme.spacing.unit,
-		paddingLeft: theme.spacing.unit * 10,
-		transition: theme.transitions.create('width'),
-		width: '100%',
-		[theme.breakpoints.up('sm')]: {
-			width: 120,
-			'&:focus': {
-				width: 200
-			}
-		}
+class SearchBar extends Component {
+	state = {
+		loading: false
+	};
+	constructor(props) {
+		super(props);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
-});
 
-function SearchAppBar(props) {
-	const { classes } = props;
-	return (
-		<div className={classes.root}>
-			<AppBar position="static">
-				<Toolbar>
-					<Typography
-						className={classes.title}
-						variant="h6"
-						color="inherit"
-						noWrap
-					>
-						Movie app
-					</Typography>
-					<div className={classes.grow} />
-					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-							<SearchIcon />
+	handleSubmit(e) {
+		this.setState({ loading: true });
+
+		e.preventDefault();
+
+		serviceAPI
+			.getSearchMovies(this.refs.username.value)
+			.then(response => {
+				console.log('==== response ====');
+				console.log(response.data);
+				if (response.status === 200) {
+					console.log('==== response 200====');
+					this.setState({
+						loading: false,
+						show: false,
+						result: response.data
+					});
+				}
+				if (response.status === 401) {
+					console.log('==== response  401====');
+					this.setState({
+						result: response.data,
+						loading: false,
+						show: true,
+						message: 'Sorry, Houston, we have a problem.'
+					});
+				}
+				if (response.status === 422) {
+					console.log('==== response 422 ====');
+					this.setState({
+						loading: false,
+						show: true,
+						message: 'Ops, empy field '
+					});
+				}
+				if (response.status === 404) {
+					console.log('==== response 404 ====');
+					this.setState({
+						message: 'Sorry! Try again.',
+						loading: false,
+						show: true
+					});
+				}
+			})
+			.catch(error => {
+				console.log('==== response  error====');
+				console.log(error);
+				this.setState({
+					message: 'Sorry! Try again.',
+					loading: false,
+					show: true
+				});
+				// set modal hide
+				setTimeout(() => {
+					this.setState({ show: false });
+				}, 2000);
+			});
+	}
+
+	render() {
+		return (
+			<div>
+				<div>
+					<form onSubmit={this.handleSubmit}>
+						<div className="form-group">
+							<input
+								type="text"
+								ref="username"
+								className="form-control"
+								placeholder="Harry Potter"
+							/>
+							<Button
+								type="submit"
+								color="primary"
+								variant="contained"
+							>
+								<i>search</i>
+							</Button>
 						</div>
-						<InputBase
-							placeholder="Search…"
-							classes={{
-								root: classes.inputRoot,
-								input: classes.inputInput
+						<Snackbar
+							open={this.state.show}
+							ContentProps={{
+								'aria-describedby': 'message-id'
 							}}
+							message={
+								<span id="message-id">
+									{this.state.message}
+								</span>
+							}
 						/>
-					</div>
-				</Toolbar>
-			</AppBar>
-		</div>
-	);
+						{this.state.loading ? <LinearProgress /> : null}
+					</form>
+				</div>
+			</div>
+		);
+	}
 }
 
-SearchAppBar.propTypes = {
-	classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(SearchAppBar);
+export default SearchBar;
