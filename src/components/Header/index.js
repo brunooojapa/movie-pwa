@@ -7,19 +7,22 @@ import SearchBar from '../Search';
 class searchBar extends Component {
 	render() {
 		return (
-			<div className="App">
-				<header>
-					<AppBar position="static" color="default">
-						<Toolbar>
-							<Link to="/">
-								<Typography variant="h6" color="inherit" noWrap>
-									Movie
-								</Typography>
-							</Link>
-							<SearchBar />
-						</Toolbar>
-					</AppBar>
-				</header>
+			<div className="hero-header">
+				<AppBar position="static" color="default" className="header">
+					<Toolbar>
+						<Link to="/">
+							<Typography
+								variant="h1"
+								color="inherit"
+								noWrap
+								className="header-brand"
+							>
+								Movie List
+							</Typography>
+						</Link>
+						<SearchBar />
+					</Toolbar>
+				</AppBar>
 			</div>
 		);
 	}

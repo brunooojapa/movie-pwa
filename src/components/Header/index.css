@@ -1,17 +1,10 @@
-	.card {
-		display: flex;
-		min-height: 400px;
-	}
+.hero-header .header {
+	color: #fff;
+	background-color: #60c6ad;
+}
 
-	.details {
-		display: flex;
-		flex-direction: column
-	}
-
-	.content {
-		flex: 1 0 auto
-	}
-
-	.cover {
-		width: 20%
-	}
+.hero-header .header-brand {
+	font-size: 30px;
+	margin-right: 30px;
+	color: #fff;
+}
