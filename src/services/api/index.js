@@ -1,22 +1,33 @@
-import axios from 'axios';
+import { get } from 'axios';
 
-const API = 'a0c7353e57057d94826c978d6fe6c244';
+const API = {
+	key: 'a0c7353e57057d94826c978d6fe6c244',
+	url: 'https://api.themoviedb.org/3',
+	language: 'en-US'
+};
 const serviceAPI = {
 	getPopularMovie(page) {
-		return axios.get(
-			`https://api.themoviedb.org/3/movie/popular?api_key=${API}&language=en-US&page=${page}`
+		return get(
+			`${API.url}/movie/popular?api_key=${API.key}&language=${
+				API.language
+			}&page=${page}`
 		);
 	},
 
+	//temporary id
 	getDetailsMovie(id) {
-		return axios.get(
-			`https://api.themoviedb.org/3/movie/335983?api_key=${API}&language=en-US`
+		return get(
+			`${API.url}/movie/335983?api_key=${API.key}&language=${
+				API.language
+			}`
 		);
 	},
 
 	getSearchMovies(name) {
-		return axios.get(
-			`https://api.themoviedb.org/3/search/movie?api_key=${API}&language=en-US&query=${name}&page=1&include_adult=false`
+		return get(
+			`${API.url}/search/movie?api_key=${API.key}&language=${
+				API.language
+			}&query=${name}&page=1&include_adult=false`
 		);
 	}
 };
