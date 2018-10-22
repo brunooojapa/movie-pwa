@@ -17,3 +17,26 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.container {
+  margin: 0 auto;
+  width: 800px;
+}
+
+@media (max-width: 991px) {
+
+  .container,
+  .container .detail-img,
+  .container .list-img {
+    width: 100%;
+  }
+
+  .container .detail-item,
+  .container .list-item {
+    display: block;
+  }
+
+  .container .detail-img {
+    padding: 0
+  }
+}
