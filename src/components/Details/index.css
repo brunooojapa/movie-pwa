@@ -1,17 +1,32 @@
-	.card {
-	    display: flex;
-	    min-height: 400px;
-	}
+.Hero {
+	text-align: center;
+	font-size: 40px;
+}
 
-	.details {
-	    display: flex;
-	    flex-direction: column
-	}
+.detail-item {
+	border: solid 1px rgba(85, 177, 154, 0.2);
+	min-height: 100px;
+}
 
-	.content {
-	    flex: 1 0 auto
-	}
+.detail-item_text {
+	height: 100%;
+	display: block;
+	width: 100%;
+	margin: 15px 0 15px 15px;
+}
 
-	.cover {
-	    width: 20%
-	}
+.item-title,
+.item-sub {
+	margin: 0;
+}
+
+.detail-item_text-bolder {
+	font-weight: bolder
+}
+
+.detail-img {
+	background-color: whitesmoke;
+	width: 150px;
+	padding: 10px;
+	border-radius: 4px
+}

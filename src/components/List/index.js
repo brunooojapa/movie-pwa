@@ -10,12 +10,13 @@ class movieList extends Component {
 		defaultPage: 1,
 		mylist: [
 			{
-				Message: 'nada'
+				Message: 'nothing'
 			}
 		]
 	};
-	componentDidMount() {
-		this.getMovieList();
+	componentWillMount() {
+		console.log(this.state.defaultPage);
+		this.handleNext();
 	}
 
 	getMovieList() {
@@ -30,33 +31,70 @@ class movieList extends Component {
 	}
 
 	handleNext = () => {
+		console.log(this.state.defaultPage);
+
 		this.setState(state => ({ defaultPage: state.defaultPage + 1 }));
+		console.log(this.state.defaultPage);
 		this.getMovieList();
 	};
 
 	handleBack = () => {
+		console.log(this.state.defaultPage);
 		this.setState(state => ({ defaultPage: state.defaultPage - 1 }));
+		console.log(this.state.defaultPage);
 		this.getMovieList();
 	};
 
 	render() {
 		return (
-			<div>
-				<div className="Appcontainer">
+			<div className="container">
+				<h1 className="hero">Most Popular Movie List</h1>
+				<div className="list">
 					<List>
 						{this.state.mylist.map((value, key) => (
 							<div key={key}>
 								<Link to="/details">
-									<ListItem key={value.length} dense button>
+									<ListItem
+										key={value.length}
+										className="list-item"
+										dense
+										button
+									>
 										<img
-											className="Avatar"
-											alt="Remy Sharp"
-											src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Venom_poster.jpg/220px-Venom_poster.jpg"
+											className="list-img"
+											alt={value.title}
+											title={value.title}
+											src="https://ubisafe.org/images/film-vector-flat-2.png"
 										/>
 
-										<div className="Appcontainer__item">
-											<p>{value.overview}</p>
-											<p>{value.popularity}</p>
+										<div className="list-item_text">
+											<h2 className="item-title">
+												{value.title}
+											</h2>
+											<h3 className="item-sub">
+												<span className="list-item_text-bolder ">
+													Original title:
+												</span>
+												{value.original_title}
+											</h3>
+											<p>
+												<span className="list-item_text-bolder ">
+													Overview:
+												</span>
+												{value.overview}
+											</p>
+											<p>
+												<span className="list-item_text-bolder ">
+													Popularity:
+												</span>
+												{value.popularity}
+											</p>
+											<p>
+												<span className="list-item_text-bolder ">
+													Vote aveage:
+												</span>
+												{value.vote_average}
+											</p>
 										</div>
 									</ListItem>
 									<Divider />
@@ -65,7 +103,8 @@ class movieList extends Component {
 						))}
 						<MobileStepper
 							position="static"
-							className={'root'}
+							className="pagination"
+							steps={0}
 							nextButton={
 								<Button size="small" onClick={this.handleNext}>
 									Next

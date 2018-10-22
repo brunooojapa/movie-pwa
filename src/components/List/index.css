@@ -1,31 +1,47 @@
-.Appcontainer {
-    margin: 0 auto;
-    width: 800px;
+.hero {
+    text-align: center;
+    font-size: 40px;
 }
 
+.list {
+    border: solid 1px rgba(85, 177, 154, 0.2)
+}
 
+.list ul {
+    padding-top: 0
+}
 
-.Appcontainer__item {
-    min-height: 80px;
+.list-item {
+    min-height: 100px;
+}
+
+.list-item_text {
+    height: 100%;
     display: block;
     width: 100%;
-    padding: 2%
+    margin: 15px 0 15px 15px;
 }
 
-.Appcontainer__item span {
-    font-size: 30px !important;
-    padding: 10%;
+.item-title,
+.item-sub {
+    margin: 0;
 }
 
-.Avatar {
-    border-radius: 0px
+.list-item_text-bolder {
+    font-weight: bolder
 }
 
-.root {
-    max-Width: 400;
+.list-img {
+    background-color: whitesmoke;
+    width: 90px;
+    padding: 4px;
+    border-radius: 4px
+}
+
+.pagination {
     flex-Grow: 1
 }
 
-.MuiMobileStepper-dot-136.MuiMobileStepper-dotActive-137 {
+.pagination>:nth-child(2) {
     display: none;
 }
