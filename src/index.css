@@ -28,7 +28,7 @@ a {
   .container,
   .container .detail-img,
   .container .list-img {
-    width: 100%;
+    width: 99%;
   }
 
   .container .detail-item,
@@ -37,6 +37,19 @@ a {
   }
 
   .container .detail-img {
-    padding: 0
+    width: 70%;
+    padding: 0;
+  }
+
+  .App .hero-header .header>div {
+    display: block;
+  }
+
+  .search-group .search-input {
+    width: 90%;
+  }
+
+  .hero-header .header {
+    padding: 10px 0;
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { LinearProgress, Button, Snackbar } from '@material-ui/core';
+import './index.css';
 import serviceAPI from '../../services/api';
 
 class SearchBar extends Component {
@@ -73,37 +74,32 @@ class SearchBar extends Component {
 	render() {
 		return (
 			<div>
-				<div>
-					<form onSubmit={this.handleSubmit}>
-						<div className="form-group">
-							<input
-								type="text"
-								ref="username"
-								className="form-control"
-								placeholder="Harry Potter"
-							/>
-							<Button
-								type="submit"
-								color="primary"
-								variant="contained"
-							>
-								<i>search</i>
-							</Button>
-						</div>
-						<Snackbar
-							open={this.state.show}
-							ContentProps={{
-								'aria-describedby': 'message-id'
-							}}
-							message={
-								<span id="message-id">
-									{this.state.message}
-								</span>
-							}
+				<form onSubmit={this.handleSubmit}>
+					<div className="search-group">
+						<input
+							type="text"
+							ref="username"
+							className="search-input"
+							placeholder="Harry Potter"
 						/>
-						{this.state.loading ? <LinearProgress /> : null}
-					</form>
-				</div>
+						<Button
+							type="submit"
+							color="primary"
+							variant="contained"
+							className="search-button"
+						>
+							<i>search</i>
+						</Button>
+					</div>
+					<Snackbar
+						open={this.state.show}
+						ContentProps={{ 'aria-describedby': 'message-id' }}
+						message={
+							<span id="message-id">{this.state.message}</span>
+						}
+					/>
+					{this.state.loading ? <LinearProgress /> : null}
+				</form>
 			</div>
 		);
 	}

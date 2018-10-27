@@ -1,9 +1,22 @@
-.Appcontainer {
-    margin: 0 auto;
-    width: 800px;
-    background-color: red;
+.search-group {
+    display: flex;
 }
 
-.Appcontainer__item {
-    min-height: 80px
+.search-group .search-input {
+    height: 20px;
+    border-radius: 4px 0px 0px 4px;
+    background: rgba(245, 245, 245, 0.69);
+    -webkit-appearance: listitem;
+    padding: 6px;
+}
+
+.search-group .search-button {
+    border-radius: 0px 4px 4px 0px;
+    background-color: #009874;
+    box-shadow: none;
+}
+
+.hero-header .header>div {
+    display: flex;
+    justify-content: space-between;
 }
