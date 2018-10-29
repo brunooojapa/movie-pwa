@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { LinearProgress, Button, Snackbar } from '@material-ui/core';
 import './index.css';
 import serviceAPI from '../../services/api';
+import { bindActionCreators } from 'redux';
+import * as listActions from '../../actions/listActions';
+import { connect } from 'react-redux';
 
 class SearchBar extends Component {
 	state = {
@@ -9,6 +12,7 @@ class SearchBar extends Component {
 	};
 	constructor(props) {
 		super(props);
+		console.log(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -21,7 +25,7 @@ class SearchBar extends Component {
 			.getSearchMovies(this.refs.username.value)
 			.then(response => {
 				console.log('==== response ====');
-				console.log(response.data);
+				console.log(response.data.results);
 				if (response.status === 200) {
 					console.log('==== response 200====');
 					this.setState({
@@ -29,6 +33,7 @@ class SearchBar extends Component {
 						show: false,
 						result: response.data
 					});
+					this.props.addList(response.data.results);
 				}
 				if (response.status === 401) {
 					console.log('==== response  401====');
@@ -105,4 +110,13 @@ class SearchBar extends Component {
 	}
 }
 
-export default SearchBar;
+const mapStateToProps = state => ({
+	list: state.list[0]
+});
+
+const mapDispachToProps = dispatch => bindActionCreators(listActions, dispatch);
+
+export default connect(
+	mapStateToProps,
+	mapDispachToProps
+)(SearchBar);
