@@ -3,16 +3,33 @@ import React, { Component } from 'react';
 import serviceAPI from '../../services/api';
 import './index.css';
 import { ListItem } from '@material-ui/core';
+import { bindActionCreators } from 'redux';
+import * as listActions from '../../actions/listActions';
+import { connect } from 'react-redux';
 
 class movieDetails extends Component {
-	componentWillMount() {
-		this.setState({
-			movieDetail: []
-		});
+	constructor(props) {
+		super(props);
+		console.log('teste');
+		console.log(props);
 	}
+	state = {
+		defaultPage: 1,
+		movieDetail: []
+	};
+	componentWillMount() {
+		this.props.addList(this.state.movieDetail);
+		// this.setState({ movieDetail: this.props.itemDetail[0] }); second options , faster but with fewer items
+		console.log(this.props.itemDetail[0]);
+	}
+
 	componentDidMount() {
+		this.getDetails();
+	}
+
+	getDetails = () => {
 		serviceAPI
-			.getDetailsMovie()
+			.getDetailsMovie(this.props.itemDetail[0].id)
 			.then(response => {
 				console.log('==== response ====');
 				console.log(response.data);
@@ -21,7 +38,7 @@ class movieDetails extends Component {
 			.catch(error => {
 				console.log(error);
 			});
-	}
+	};
 
 	render() {
 		return (
@@ -64,24 +81,30 @@ class movieDetails extends Component {
 							</span>
 							{this.state.movieDetail.vote_average}
 						</p>
-						<p>
-							<span className="detail-item_text-bolder ">
-								Budget:
-							</span>
-							{this.state.movieDetail.budget}
-						</p>
-						<p>
-							<span className="detail-item_text-bolder ">
-								Revenue:
-							</span>
-							{this.state.movieDetail.revenue}
-						</p>
-						<p>
-							<span className="detail-item_text-bolder ">
-								Tagline:
-							</span>
-							{this.state.movieDetail.tagline}
-						</p>
+						{!this.state.movieDetail.budget ? null : (
+							<p>
+								<span className="detail-item_text-bolder ">
+									Budget:
+								</span>
+								{this.state.movieDetail.budget}
+							</p>
+						)}
+						{!this.state.movieDetail.revenue ? null : (
+							<p>
+								<span className="detail-item_text-bolder ">
+									Revenue:
+								</span>
+								{this.state.movieDetail.revenue}
+							</p>
+						)}
+						{!this.state.movieDetail.tagline ? null : (
+							<p>
+								<span className="detail-item_text-bolder ">
+									Tagline:
+								</span>
+								{this.state.movieDetail.tagline}
+							</p>
+						)}
 					</div>
 				</ListItem>
 			</div>
@@ -89,4 +112,13 @@ class movieDetails extends Component {
 	}
 }
 
-export default movieDetails;
+const mapStateToProps = state => ({
+	itemDetail: state.itemDetails
+});
+
+const mapDispachToProps = dispatch => bindActionCreators(listActions, dispatch);
+
+export default connect(
+	mapStateToProps,
+	mapDispachToProps
+)(movieDetails);

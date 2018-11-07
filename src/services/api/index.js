@@ -17,9 +17,7 @@ const serviceAPI = {
 	//temporary id
 	getDetailsMovie(id) {
 		return get(
-			`${API.url}/movie/335983?api_key=${API.key}&language=${
-				API.language
-			}`
+			`${API.url}/movie/${id}?api_key=${API.key}&language=${API.language}`
 		);
 	},
 

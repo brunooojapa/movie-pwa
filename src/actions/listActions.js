@@ -4,3 +4,10 @@ export function addList(obj) {
 		obj
 	};
 }
+
+export function itemDetails(item) {
+	return {
+		type: 'DETAIL',
+		item
+	};
+}

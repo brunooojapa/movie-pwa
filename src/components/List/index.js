@@ -51,6 +51,11 @@ class movieList extends Component {
 		console.log(this.state.defaultPage);
 		this.getMovieList();
 	};
+	details = value => {
+		console.log('details');
+		console.log(value);
+		this.props.itemDetails(value);
+	};
 
 	render() {
 		return (
@@ -69,6 +74,9 @@ class movieList extends Component {
 								<div key={key}>
 									<Link to="/details">
 										<ListItem
+											onClick={() => {
+												this.details(value);
+											}}
 											key={value.length}
 											className="list-item"
 											dense
