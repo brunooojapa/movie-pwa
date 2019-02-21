@@ -86,7 +86,7 @@ class movieList extends Component {
 												className="list-img"
 												alt={value.title}
 												title={value.title}
-												src="https://ubisafe.org/images/film-vector-flat-2.png"
+												src={!value.poster_path?  "https://ubisafe.org/images/film-vector-flat-2.png" : `https://image.tmdb.org/t/p/original/${value.poster_path}`} 
 											/>
 
 											<div className="list-item_text">
