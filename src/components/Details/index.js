@@ -68,8 +68,8 @@ class movieDetails extends Component {
                             </span>
                             {this.state.movieDetail.original_title}
                         </h3>
-                        <p>
-                            <span className="detail-item_text-bolder ">
+                        <p className="justify-text">
+                            <span className="detail-item_text-bolder">
                                 Overview:
                             </span>
                             {this.state.movieDetail.overview}

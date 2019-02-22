@@ -99,7 +99,7 @@ class movieList extends Component {
 													</span>
 													{value.original_title}
 												</h3>
-												<p>
+												<p className="justify-text">
 													<span className="list-item_text-bolder ">
 														Overview:
 													</span>
